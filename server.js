@@ -22,6 +22,8 @@ app.use("/api/v1/heroes/", heroRouter);
 app.use("/api/v1/powers/", powerRouter);
 app.use("/api/v1/missions/", missionRouter);
 
+app.use(express.static("public"));
+
 app.use(errorHandler)
 
 app.listen(3000, () => console.log("Server listen on http://localhost:3000"));

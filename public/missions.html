@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Missions</title>
+</head>
+<body>
+  <h1>Missions</h1>
+  <div id="missions-list"></div>
+
+  <script>
+    // Adjust the URL below to match your actual endpoint
+    fetch('/api/v1/missions')
+      .then(response => response.json())
+      .then(data => {
+        const listContainer = document.getElementById('missions-list');
+        data.forEach(mission => {
+          const item = document.createElement('div');
+          // Display mission data (you can adjust as needed)
+          item.textContent = `Mission: ${mission.name} - Description: ${mission.description}`;
+          listContainer.appendChild(item);
+        });
+      })
+      .catch(error => console.error('Error fetching missions:', error));
+  </script>
+</body>
+</html>

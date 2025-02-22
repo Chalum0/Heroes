@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Powers</title>
+</head>
+<body>
+  <h1>Powers</h1>
+  <div id="powers-list"></div>
+
+  <script>
+    // Adjust the URL below to match your actual endpoint
+    fetch('/api/v1/powers')
+      .then(response => response.json())
+      .then(data => {
+        const listContainer = document.getElementById('powers-list');
+        data.forEach(power => {
+          const item = document.createElement('div');
+          // Display power data
+          item.textContent = `${power.name} - ${power.description}`;
+          listContainer.appendChild(item);
+        });
+      })
+      .catch(error => console.error('Error fetching powers:', error));
+  </script>
+</body>
+</html>

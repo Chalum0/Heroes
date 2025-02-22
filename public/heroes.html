@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Heroes</title>
+</head>
+<body>
+  <h1>Heroes</h1>
+  <div id="heroes-list"></div>
+
+  <script>
+    // Adjust the URL below to match your actual endpoint
+    fetch('/api/v1/heroes')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        const listContainer = document.getElementById('heroes-list');
+        data.forEach(hero => {
+          const item = document.createElement('div');
+          // Display hero data
+          item.textContent = `Alias: ${hero.alias} - Powers: ${hero.powers} - PowerDate: ${hero.powerDate} - Missions: ${hero.missions} `;
+          listContainer.appendChild(item);
+        });
+      })
+      .catch(error => console.error('Error fetching heroes:', error));
+  </script>
+</body>
+</html>

@@ -19,7 +19,7 @@ export async function getPowerById(id) {
   };
 }
 
-export async function createPower({ name, descrtiption }) {
+export async function createPower({ name, description }) {
   if (!name || name.length < 3 || !/^[a-zA-Z ]+$/.test(name)) {
     throw new BadRequestError("Nom invalide (3 caractères min, etc.)");
   }
