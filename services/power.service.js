@@ -19,22 +19,23 @@ export async function getPowerById(id) {
   };
 }
 
-export async function createPower({ name }) {
-
-    if (await PowerRepository.powerExists(name)) {
-      throw new ConflictError("Le pouvoir existe déjà (name).");
-    }
-
-    const power = await PowerRepository.createPower({ name });
-
-    return power.dataValues;
-  }
-
-export async function updatePower(id, { name }) {
+export async function createPower({ name, descrtiption }) {
   if (!name || name.length < 3 || !/^[a-zA-Z ]+$/.test(name)) {
-    throw new BadRequestError("Nom non valide (3 caractères min, etc.)");
+    throw new BadRequestError("Nom invalide (3 caractères min, etc.)");
+  }
+  if (await PowerRepository.powerExists(name)) {
+    throw new ConflictError("Le pouvoir existe déjà (name).");
   }
 
+  const power = await PowerRepository.createPower({ name, description });
+
+  return power.dataValues;
+}
+
+export async function updatePower(id, { name, description }) {
+  if (!name || name.length < 3 || !/^[a-zA-Z ]+$/.test(name)) {
+    throw new BadRequestError("Nom invalide (3 caractères min, etc.)");
+  }
   if (await PowerRepository.powerExists(name)) {
     throw new ConflictError("Le pouvoir existe déjà (nom).");
   }
@@ -43,7 +44,7 @@ export async function updatePower(id, { name }) {
     throw new NotFoundError("Le pouvoir n'existe pas, id:");
   }
 
-  const power = await PowerRepository.updatePower(id, { name });
+  const power = await PowerRepository.updatePower(id, { name, description });
 
   return power.dataValues;
 }
@@ -63,6 +64,7 @@ export async function getAllPowers() {
     return {
       id: power.id,
       name: power.name,
+      description: power.description,
     };
   });
 

@@ -21,8 +21,8 @@ export async function getMissionById(req, res, next) {
 
 export async function createMission(req, res, error) {
     try {
-      const { name } = req.body;
-      const newMission = await MissionService.createMission({ name });
+      const { name, description } = req.body;
+      const newMission = await MissionService.createMission({ name, description });
       res.json(newMission);
     } catch (error) {
       next(error)
@@ -32,8 +32,8 @@ export async function createMission(req, res, error) {
 export async function updateMission(req, res, next) {
   try {
     const id = req.params.id;
-    const { name } = req.body;
-    const updatedMission = await MissionService.updateMission(id, { name });
+    const { name, description } = req.body;
+    const updatedMission = await MissionService.updateMission(id, { name, description });
     res.json(updatedMission);
   } catch (error) {
     next(error)

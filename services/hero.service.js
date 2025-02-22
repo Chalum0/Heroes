@@ -51,6 +51,40 @@ export async function createHero({ alias, identity, powerDate, powers = [], miss
   return hero.dataValues;
 }
 
+export async function addPowerToHero(heroId, powerId){
+  const hero = await HeroRepository.getHeroById(heroId)
+  const power = await PowerRepository.getPowerById(powerId);
+  if (power) {
+    await hero.addPower(power);
+  }
+  return hero.datavalues;
+}
+export async function removePowerToHero(heroId, powerId){
+  const hero = await HeroRepository.getHeroById(heroId)
+  const power = await PowerRepository.getPowerById(powerId);
+  if (power) {
+    await hero.removePower(power);
+  }
+  return hero.datavalues;
+}
+
+export async function addMissionToHero(heroId, missionId){
+  const hero = await HeroRepository.getHeroById(heroId)
+  const mission = await MissionRepository.getMissionById(missionId);
+  if (mission) {
+    await hero.addMission(mission);
+  }
+  return hero.datavalues;
+}
+export async function removeMissionToHero(heroId, missionId){
+  const hero = await HeroRepository.getHeroById(heroId)
+  const mission = await MissionRepository.getMissionById(missionId);
+  if (mission) {
+    await hero.removeMission(mission);
+  }
+  return hero.datavalues;
+}
+
 export async function updateHero(id, { alias, identity, powerDate }) {
   if (!alias || alias.length < 3 || !/^[a-zA-Z ]+$/.test(alias)) {
     throw new BadRequestError("Alias non valide (3 caractères min, etc.)");

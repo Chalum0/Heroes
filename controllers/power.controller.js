@@ -21,8 +21,8 @@ export async function getPowerById(req, res, next) {
 
 export async function createPower(req, res, error) {
     try {
-      const { name } = req.body;
-      const newPower = await PowerService.createPower({ name });
+      const { name, description } = req.body;
+      const newPower = await PowerService.createPower({ name, description });
       res.json(newPower);
     } catch (error) {
       next(error)
@@ -32,8 +32,8 @@ export async function createPower(req, res, error) {
 export async function updatePower(req, res, next) {
   try {
     const id = req.params.id;
-    const { name } = req.body;
-    const updatedPower = await PowerService.updatePower(id, { name });
+    const { name, description } = req.body;
+    const updatedPower = await PowerService.updatePower(id, { name, description });
     res.json(updatedPower);
   } catch (error) {
     next(error)

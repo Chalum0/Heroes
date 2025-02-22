@@ -1,8 +1,11 @@
 export const missionsMocks = [
     {
-      name: "Paint the ceiling",
+      name: "Painting",
+      description: "Paint the ceiling",
+
     },
     {
-      name: "Teach dumb pinguins how to make an api using nodeJs",
+      name: "Teaching",
+      description: "Teach dumb pinguins how to make an api using nodeJs",
     },
   ];

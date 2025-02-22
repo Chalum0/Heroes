@@ -50,6 +50,48 @@ export async function updateHero(req, res, next) {
   }
 }
 
+export async function addPowerToHero(req, res, next) {
+  try {
+    const id = req.params.id;
+    const { powerId } = req.body;
+    const updatedHero = await HeroService.addPowerToHero(id, { powerId });
+    res.json(updatedHero);
+  } catch (error) {
+    next(error)
+  }
+}
+export async function removePowerToHero(req, res, next) {
+  try {
+    const id = req.params.id;
+    const { powerId } = req.body;
+    const updatedHero = await HeroService.removePowerToHero(id, { powerId });
+    res.json(updatedHero);
+  } catch (error) {
+    next(error)
+  }
+}
+
+export async function addMissionToHero(req, res, next) {
+  try {
+    const id = req.params.id;
+    const { missionId } = req.body;
+    const updatedHero = await HeroService.addMissionToHero(id, { missionId });
+    res.json(updatedHero);
+  } catch (error) {
+    next(error)
+  }
+}
+export async function removeMissionToHero(req, res, next) {
+  try {
+    const id = req.params.id;
+    const { missionId } = req.body;
+    const updatedHero = await HeroService.removeMissionToHero(id, { missionId });
+    res.json(updatedHero);
+  } catch (error) {
+    next(error)
+  }
+}
+
 export async function deleteHero(req, res, next) {
   try {
     const id = req.params.id;

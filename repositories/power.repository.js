@@ -1,7 +1,7 @@
 import Power from "../models/power.model.js";
 
-export async function createPower({name}) {
-  const power = await Power.create({name})
+export async function createPower({name, description }) {
+  const power = await Power.create({name, description})
   return power
 }
 

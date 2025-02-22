@@ -1,7 +1,7 @@
 import Mission from "../models/mission.model.js";
 
-export async function createMission({name}) {
-  const mission = await Mission.create({name})
+export async function createMission({name, description }) {
+  const mission = await Mission.create({name, description })
   return mission
 }
 

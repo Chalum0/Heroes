@@ -19,21 +19,23 @@ export async function getMissionById(id) {
   };
 }
 
-export async function createMission({ name }) {
-    if (await MissionRepository.missionExists(name)) {
-      throw new ConflictError("La mission existe déjà (name).");
-    }
-
-    const mission = await MissionRepository.createMission({ name });
-
-    return mission.dataValues;
-  }
-
-export async function updateMission(id, { name }) {
+export async function createMission({ name, description }) {
   if (!name || name.length < 3 || !/^[a-zA-Z ]+$/.test(name)) {
-    throw new BadRequestError("Nom non valide (3 caractères min, etc.)");
+    throw new BadRequestError("Nom invalide (3 caractères min, etc.)");
+  }
+  if (await MissionRepository.missionExists(name)) {
+    throw new ConflictError("La mission existe déjà (name).");
   }
 
+  const mission = await MissionRepository.createMission({ name, description });
+
+  return mission.dataValues;
+}
+
+export async function updateMission(id, { name, description }) {
+  if (!name || name.length < 3 || !/^[a-zA-Z ]+$/.test(name)) {
+    throw new BadRequestError("Nom invalide (3 caractères min, etc.)");
+  }
   if (await MissionRepository.missionExists(name)) {
     throw new ConflictError("La mission existe déjà (nom).");
   }
@@ -42,7 +44,7 @@ export async function updateMission(id, { name }) {
     throw new NotFoundError("La mission n'existe pas, id:");
   }
 
-  const mission = await MissionRepository.updateMission(id, { name });
+  const mission = await MissionRepository.updateMission(id, { name, description });
 
   return mission.dataValues;
 }
@@ -62,6 +64,7 @@ export async function getAllMissions() {
     return {
       id: mission.id,
       name: mission.name,
+      description: mission.description,
     };
   });
 
